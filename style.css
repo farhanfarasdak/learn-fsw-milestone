@@ -1,8 +1,34 @@
-.list-card{
+body{
+  text-align: center;
+}
+
+.jumbo-container{
+  width: 700px;
+  height: 500px;
+  border: 1px solid black;
+  margin: auto;
+  overflow: hidden;
+}
+
+.thumbs-container{
+  margin-top: 10px;
   display: flex;
   justify-content: center;
 }
 
-.card{
-  margin: 10px
+.jumbo-container img{
+  width: 100%;
+  height: 100%;
+}
+
+.thumb {
+  width: 200px;
+  height: 150px;
+  margin: 10px;
+  border: 1px solid gray;
+  cursor: pointer;
+}
+
+.thumb:hover{
+  opacity: 50%;
 }
