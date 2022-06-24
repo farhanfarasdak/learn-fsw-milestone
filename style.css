@@ -1,19 +1,21 @@
-.jumbotron{
-  background: url('img/1.jpg');
+.kotak{
+  width: 250px;
+  height: 250px;
+  position: absolute;
 }
 
-.jumbotron img {
-  width: 300px;
+.pertama{
+  background-color: blue;
+  z-index: 99;
 }
-.img_about {
-  width: 300px;
-  margin-left: 120px;
+.kedua{
+  margin-top: 50px;
+  margin-left: 50px;
+  background-color: green;
+  z-index: 100;
 }
-
-.img_g {
-  width: 350px;
-}
-
-.img_g:hover {
- opacity: 50%;
+.ketiga{
+  margin-top: 100px;
+  margin-left: 100px;
+  background-color: red;
 }
