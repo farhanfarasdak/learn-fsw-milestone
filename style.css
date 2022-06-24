@@ -1,7 +1,19 @@
+.jumbotron{
+  background: url('img/1.jpg');
+}
+
 .jumbotron img {
   width: 300px;
 }
 .img_about {
   width: 300px;
   margin-left: 120px;
+}
+
+.img_g {
+  width: 350px;
+}
+
+.img_g:hover {
+ opacity: 50%;
 }
