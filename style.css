@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&family=Open+Sans:ital,wght@0,300;0,400;1,400&display=swap');
 .jumbotron{
   background-image: url('img/bg.jpeg');
   height: 650px;
@@ -21,6 +22,38 @@
 
 .btn{
   border-radius: 40px;
+}
+
+.card-body p{
+  font-family: 'Libre Baskerville', serif;
+  margin-bottom: 0px;
+  font-size: 24px;
+}
+
+.mycard{
+  margin-top: -80px;
+}
+
+.card{
+  border-radius: 40px;
+}
+
+.carousel-item img{
+  border-radius: 10px;
+}
+
+.section2{
+  margin-top: 30px;
+}
+
+.section2 .col-5 h1{
+  text-transform: uppercase;
+  font-weight: 200;
+  font-size: 35px;
+}
+
+.boldthis {
+  font-weight: 400;
 }
 
 @media (min-width: 992px) { 
