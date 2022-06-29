@@ -1,0 +1,45 @@
+.jumbotron{
+  background-image: url('img/bg.jpeg');
+  height: 650px;
+  background-size: cover;
+  border-radius: 0px;
+  text-align: center;
+}
+
+.jumbotron h1 {
+  margin-top: 120px;
+  text-shadow: 1px 1px 2px black;
+}
+
+.jumbotron p {
+  text-shadow: 1px 1px 2px black;
+}
+
+.jumbotron .btn{
+  margin-top: 50px;
+}
+
+.btn{
+  border-radius: 40px;
+}
+
+@media (min-width: 992px) { 
+  .jumbotron{
+    margin-top: -56px;
+  }
+
+  .nav-item {
+    margin-left: 30px;
+    text-shadow: 0px 0px 4px black;
+  }
+
+  .navbar-light .navbar-brand{
+    color: white;
+    text-shadow: 0px 0px 4px black;
+    font-weight: 700;
+  }
+
+  .navbar-light .collapse .navbar-nav .nav-item a {
+    color: white;
+  }
+}
