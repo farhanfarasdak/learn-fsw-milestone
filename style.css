@@ -1,81 +1,46 @@
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&family=Open+Sans:ital,wght@0,300;0,400;1,400&display=swap');
-.jumbotron{
-  background-image: url('img/bg.jpeg');
-  height: 650px;
-  background-size: cover;
-  border-radius: 0px;
+body{
+  margin: 0px;
+}
+.wrapper{
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  perspective: 10px;
+}
+
+header{
+  position: relative;
+  height: 100%;
+  transform-style: preserve-3d;
+  z-index: -1;
+}
+
+.background{
+  transform: translateZ(-10px) scale(2);
+}
+
+.foreground{
+  transform: translateZ(-5px) scale(1.5);
+}
+
+.title{
   text-align: center;
-
-  background-attachment: fixed;
-  background-position: center;
+  color: white;
+  text-shadow: 0px 0px 4px black;
+  margin-top: 500px;
+  position: absolute;
+  width: 100%;
 }
 
-.jumbotron h1 {
-  margin-top: 120px;
-  text-shadow: 1px 1px 2px black;
+.background, .foreground {
+  position: absolute;
+  width: 100%;
+  object-fit: cover;
 }
 
-.jumbotron p {
-  text-shadow: 1px 1px 2px black;
-}
-
-.jumbotron .btn{
-  margin-top: 50px;
-}
-
-.btn{
-  border-radius: 40px;
-}
-
-.card-body p{
-  font-family: 'Libre Baskerville', serif;
-  margin-bottom: 0px;
-  font-size: 24px;
-}
-
-.mycard{
-  margin-top: -80px;
-}
-
-.card{
-  border-radius: 40px;
-}
-
-.carousel-item img{
-  border-radius: 10px;
-}
-
-.section2{
-  margin-top: 30px;
-}
-
-.section2 .col-lg-5 h1{
-  text-transform: uppercase;
-  font-weight: 200;
-  font-size: 35px;
-}
-
-.boldthis {
-  font-weight: 400;
-}
-
-@media (min-width: 992px) { 
-  .jumbotron{
-    margin-top: -56px;
-  }
-
-  .nav-item {
-    margin-left: 30px;
-    text-shadow: 0px 0px 4px black;
-  }
-
-  .navbar-light .navbar-brand{
-    color: white;
-    text-shadow: 0px 0px 4px black;
-    font-weight: 700;
-  }
-
-  .navbar-light .collapse .navbar-nav .nav-item a {
-    color: white;
-  }
+section{
+  background-color: #ACACAC;
+  color: white;
+  font-size: 18px;
+  padding: 10px;
 }
