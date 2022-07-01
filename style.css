@@ -5,6 +5,9 @@
   background-size: cover;
   border-radius: 0px;
   text-align: center;
+
+  background-attachment: fixed;
+  background-position: center;
 }
 
 .jumbotron h1 {
