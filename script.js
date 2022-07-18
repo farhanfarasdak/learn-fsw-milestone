@@ -1,6 +1,6 @@
 alert("Selamat Datang Di Tebak Angka");
-const myPromptName = prompt("Masukkan Nama Anda");
-const myPromptNumber = prompt(`Hi ${myPromptName} berapa angka anda ( 1 - 9 )?`);
+let myPromptName = prompt("Masukkan Nama Anda");
+let myPromptNumber = prompt(`Hi ${myPromptName} berapa angka anda ( 1 - 9 )?`);
 
 let myName = document.getElementById("my-name")
 let myNumber = document.getElementById("my-number")
@@ -21,3 +21,26 @@ const generateNumber = () => {
     myResult.innerText = `SUDAH ${attempt}X COBA MASIH SALAH!!!`
   }
 }
+
+const startGame = () => {
+  myPromptName = prompt("Masukkan Nama Anda");
+  myPromptNumber = prompt(`Hi ${myPromptName} berapa angka anda ( 1 - 9 )?`);
+  myName.innerText = myPromptName
+  myNumber.innerText = myPromptNumber
+  attempt = 0
+  myResult.innerText = ""
+  randomNumber.innerText = "?"
+}
+
+myResult.addEventListener("mouseenter", () => {
+  myResult.innerText = "Klik untuk coba dari awal"
+  myResult.style.cursor = "pointer"
+  myResult.style.color = "blue"
+})
+
+myResult.addEventListener("click", () => {
+  let confirmResult = confirm("Yakin mau ulang?")
+  if (confirmResult){
+    startGame()
+  }
+})
