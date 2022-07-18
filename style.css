@@ -1,4 +1,12 @@
-.simerah{
+body{
+  text-align: center;
+  background-color: aqua;
+}
+
+.my-span{
   color: red;
-  cursor: pointer;
+}
+
+.number-section{
+  margin-top: 50px;
 }
