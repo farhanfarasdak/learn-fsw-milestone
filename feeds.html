@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/feeds.css">
+  <title>Feeds</title>
+</head>
+<body>
+  <div class="heading">
+    <h1>My feeds</h1>
+    <p id="login-info"></p>
+    <button class="btn btn-danger" onclick=logoutUser()>LOGOUT</button>
+  </div>
+  <div class="posting-form">
+    <textarea class="form-control" id="textarea-feeds" rows="3" placeholder="Write what's on your thought"></textarea>
+    <button type="button" class="btn btn-primary" onclick=publishPost()>Post</button>
+  </div>
+  <div id="posts" class="posts"></div>
+
+
+  <script src="js/feeds.js"></script>
+</body>
+</html>
