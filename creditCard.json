@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "owner": "Farhan",
+    "bank": "BCA",
+    "cc_fee": "500",
+    "number": "51246123151231",
+    "pin": "123456"
+  },
+  {
+    "id": 2,
+    "owner": "John",
+    "bank": "BNI",
+    "cc_fee": "600",
+    "number": "51251231511",
+    "pin": "654321"
+  }
+]

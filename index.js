@@ -3,20 +3,23 @@ const fs = require('fs')
 const bodyParser = require('body-parser')
 const path = require('path')
 const md5 = require('md5')
-// const { myFunc } = require('./js/custom')
+const { printHelloWorld, printHiFarhan } = require('./js/custom')
+const { retrieveAllData, searchData, getDatabyId, printUrl, replaceData, deleteData } = require('./js/retrieveData')
 
 const app = express()
 const jsonParser = bodyParser.json()
 
 app.use('/js', express.static(__dirname+'/js'))
-
+app.use(printUrl)
 // GET POST PUT DELETE
 
 // localhost:3000/
 app.get('/', function (req, res) {
-  let data = JSON.parse(fs.readFileSync('./products.json', 'utf-8'))
-  // myFunc()
-  res.send(data)
+  res.send(retrieveAllData('products.json'))
+})
+
+app.get('/cc', function (req, res) {
+  res.send(retrieveAllData('creditCard.json'))
 })
 
 app.get('/masuk', function(req, res) {
@@ -30,15 +33,7 @@ app.get('/sudah-masuk', function(req, res) {
 app.get('/search', function (req, res) {
   let queryName = (req.query.name || "").toLowerCase()
   let queryWarna = (req.query.warna || "").toLowerCase()
-  let data = JSON.parse(fs.readFileSync('./products.json', 'utf-8'))
-  let filteredData = []
-
-  // looping and filter
-  for(let i = 0; i < data.length; i++){
-    if(data[i].name.toLowerCase().includes(queryName) && data[i].warna.toLowerCase().includes(queryWarna)){
-      filteredData.push(data[i])
-    }
-  }
+  let filteredData = searchData(queryName, queryWarna)
 
   if(filteredData.length != 0){
     res.send(filteredData)
@@ -48,15 +43,7 @@ app.get('/search', function (req, res) {
 })
 
 app.get('/:id', function (req, res) {
-  let result
-
-  let data = JSON.parse(fs.readFileSync('./products.json', 'utf-8'))
-  // find result
-  for(let i = 0; i<data.length; i++){
-    if(data[i].id == parseInt(req.params.id)){
-      result = data[i]
-    }
-  }
+  let result = getDatabyId(req.params.id)
   
   if(result != undefined){
     res.send(result)
@@ -66,7 +53,7 @@ app.get('/:id', function (req, res) {
 })
 
 app.post('/', jsonParser, (req, res) => {
-  let data = JSON.parse(fs.readFileSync('./products.json', 'utf-8'))
+  let data = retrieveAllData('products.json')
   let newId = data[data.length -1].id + 1
   req.body.id = newId
   data.push(req.body)
@@ -81,6 +68,19 @@ app.post('/login', jsonParser, (req, res) => {
   }else{
     res.status(401).send("Unauthorized")
   }
+})
+
+app.put('/:id', jsonParser, (req, res) => {
+  let data = replaceData(parseInt(req.params.id), req.body)
+  fs.writeFileSync('./products.json', JSON.stringify(data))
+  res.send(data)
+})
+
+app.delete('/:id', (req, res) => {
+  let id = parseInt(req.params.id)
+  let result = deleteData(id)
+  fs.writeFileSync('./products.json', JSON.stringify(result))
+  res.send(result)
 })
 
 app.listen(3000)
