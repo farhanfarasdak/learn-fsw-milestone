@@ -19,7 +19,12 @@ app.get('/', function (req, res) {
 })
 
 app.get('/cc', function (req, res) {
-  res.send(retrieveAllData('creditCard.json'))
+  let data = retrieveAllData('creditCard.json')
+  // filter
+  for(let i = 0; i<data.length; i++){
+    data[i].pin = "******"
+  }
+  res.send(data)
 })
 
 app.get('/masuk', function(req, res) {
