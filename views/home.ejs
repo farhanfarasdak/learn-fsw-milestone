@@ -1,0 +1,21 @@
+<%- include('partials/header') %> 
+  <h1>Home</h1>
+  <h2>Web ini milik : <%- nama %>  </h2>
+  <ul>
+    <li><a href="/slider">Slider</a></li>
+    <li><a href="/parallax">Parallax</a></li>
+  </ul>
+
+  <% if (productsData.length === 0) { %>
+   <h4>Tidak ada produk tersedia</h4>
+  <% } %>
+
+  <table>
+    <% productsData.forEach(element => { %>
+      <tr>
+        <td><%- element.nama %></td>
+        <td><%- element.harga %></td>
+      </tr>
+    <% }) %>
+  </table>
+  <%- include('partials/footer') %> 

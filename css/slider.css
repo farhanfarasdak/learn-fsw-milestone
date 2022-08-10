@@ -1,0 +1,31 @@
+body{
+  text-align: center;
+}
+
+.main-slide{
+  height: 500px;
+  width: 500px;
+  object-fit: cover;
+  border: 1px solid black;
+  display: block;
+  margin: auto;
+}
+
+.img-thumbnail{
+  height: 150px;
+  width: 150px;
+  object-fit: cover;
+  margin: 10px;
+  opacity: 0.5;
+}
+
+.img-thumbnail:hover{
+  opacity: 1;
+}
+
+.thumbnails{
+  border: 1px dotted black;
+  margin: auto;
+  display: inline-block;
+  margin-top: 10px;
+}
