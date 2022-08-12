@@ -1,0 +1,22 @@
+body{
+  text-align: center;
+}
+
+.my-title{
+  margin: 40px
+}
+
+.my-row:hover{
+  background: grey;
+}
+
+.pokemon-img{
+  width: 400px;
+}
+
+.img-post{
+  padding: 20px;
+  position: sticky;
+  background: yellow;
+  top: 0;
+}
