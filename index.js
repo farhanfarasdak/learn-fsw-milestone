@@ -1,89 +1,77 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const { Tweet } = require('./models')
+const { ClassRoom, Student } = require('./models')
 
 const app = express()
 const jsonParser = bodyParser.json()
 
+app.use('/css', express.static(__dirname+'/css'))
+app.use('/js', express.static(__dirname+'/js'))
+app.set('view engine', 'ejs')
 
-// CRUD = CREATE, READ, UPDATE, DELETE 
-
-// READ
-app.get('/', async (req, res)=>{
-  // SELECT * FROM <db_name>;
-  const data = await Tweet.findAll()
-  res.send(data)
+// RENDERING VIEW
+app.get('/', (req, res) => {
+  res.send('Hello World')
 })
 
-app.get('/search', async (req, res) => {
-  // SELECT * FROM <db_name> WHERE name=<>
-  const data = await Tweet.findAll({
-    where: {
-      owner: req.query.name
-    }
-  })
-  res.send(data)
+app.get('/dashboard-classroom', async (req, res) => {
+  const classRoom = await fetch('http://localhost:8090/class-room')
+  const data = await classRoom.json()
+  console.log(data)
+  res.render('classroom', { classRooms: data })
 })
 
-app.get('/:id', async (req, res)=> {
-  // SELECT * FROM <db_name> WHERE id=<id> 
-  const data = await Tweet.findOne({
-    where: {
-      id: req.params.id
-    }
-  })
-  if( data == null){
-    res.status(404).send("Data Not Found")
-  }else{
-    res.send(data)
-  }
+app.get('/dashboard-classroom/:id', async (req, res) => {
+  const students = await fetch(`http://localhost:8090/class-room/${req.params.id}/student`)
+  const data = await students.json()
+
+  res.render('students', { data: data })
 })
+
 
 // CREATE
-app.post('/', jsonParser, async (req, res)=>{
-  // INSERT INTO <db_name> (col1, col2...) VALUES (val1, val2,...);
-  const data = await Tweet.create({
-    content: req.body.content,
-    owner: req.body.owner
+app.post('/class-room', jsonParser, async (req, res) =>{
+  // { "name": "10 A" }
+  const className = req.body.name
+  const data = await ClassRoom.create({
+    name: className
+  })
+
+  res.status(201).send(data)
+})
+
+app.post('/student', jsonParser, async (req, res) => {
+  const data = await Student.create({
+    name: req.body.name,
+    ClassRoomId:req.body.ClassRoomId
+  })
+
+  res.status(201).send(data)
+})
+
+
+// READ
+app.get('/class-room', async (req, res) => {
+  // SELECT * FROM ClassRooms;
+  const data = await ClassRoom.findAll()
+  res.send(data)
+})
+
+app.get('/class-room/:id/student', async (req, res) => {
+  // 1 option
+  // const data = await Student.findAll({
+  //   where: {
+  //     ClassRoomId: req.params.id
+  //   }
+  // })
+
+  // 2 option
+  const data = await ClassRoom.findByPk(req.params.id, {
+    include: Student
   })
   res.send(data)
 })
 
-// UPDATE
-app.put('/:id', jsonParser, async (req, res)=> {
-  try {
-    const data = await Tweet.findOne({
-      where: {
-        id: req.params.id
-      }
-    })
-
-    // null.content
-    data.content = req.body.content
-    data.save()
-  
-    res.send(data)
-    
-  } catch (error) {
-    res.status(404).send("Unable to process the request")
-  }
-})
-
-// DELETE
-app.delete('/:id', async (req,res)=>{
-  try {
-    const data = await Tweet.findOne({
-      where: {
-        id: req.params.id
-      }
-    })
-    data.destroy()
-    res.send('Data has been deleted')
-  } catch (error) {
-    res.status(404).send("Unable to process the request")
-  }
-})
-
-app.listen(4000, () => {
-  console.log("Running at localhost:4000")
+app.listen(8090, () => {
+  console.log("App is running")
 })

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="../css/style.css">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Student On <%= data.name %>  </h1>
+
+  <div class="input-form">
+    <div class="form-group">
+      <input class="form-control" placeholder="Input Student Name" id="my-student-input">
+    </div>
+    <button type="submit" class="btn btn-primary" onclick=handleInputStudent(<%=  data.id %>)>Submit</button>
+  </div>
+
+  <div class="class-table">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Class Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for( let index = 0; index < data.Students.length; index++ ) { %>
+          <tr>
+            <th scope="row"><%= index + 1 %> </th>
+            <td><%= data.Students[index].name %> </td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>
