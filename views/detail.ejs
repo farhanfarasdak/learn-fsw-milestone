@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="../css/style.css">
+  <title>Document</title>
+</head>
+<body>
+  <h1>SI Biodata - Detail</h1>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+        <div class="input-form">
+            <div class="form-group">
+              <input class="form-control" placeholder="username" id="Username" value="<%= userDetail.username %>" disabled>
+            </div>
+            <div class="form-group">
+              <input class="form-control" placeholder="full name" id="Fullname" value="<%= userDetail.Biodata.fullname %>">
+            </div>
+            <div class="form-group">
+              <input class="form-control" placeholder="address" id="Address" value="<%= userDetail.Biodata.address %>">
+            </div>
+            <div class="form-group">
+              <input class="form-control" placeholder="job" id="Job" value="<%= userDetail.Biodata.job %>">
+            </div>
+            <div class="form-group">
+              <input class="form-control" placeholder="age" id="Age" value="<%= userDetail.Biodata.age %>">
+            </div>
+            <button type="submit" class="btn btn-primary" onclick= handleEditBiodata(<%= userDetail.Biodata.id %>) >Edit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/script.js"></script>
+</body>
+</html>

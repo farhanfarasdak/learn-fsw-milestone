@@ -1,14 +1,12 @@
 h1{
+  margin-top: 50px;
   text-align: center;
+  margin-bottom: 50px;
 }
 
 .input-form{
-  width: 40%;
-  margin: auto;
-}
-
-.class-table{
-  width: 40%;
-  margin: auto;
-  margin-top: 50px;
+  border: 1px solid black;
+  padding: 30px;
+  width:80%;
+  border-radius: 10px;
 }

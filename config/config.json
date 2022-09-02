@@ -2,21 +2,21 @@
   "development": {
     "username": "farhanfarasdak",
     "password": null,
-    "database": "schools",
+    "database": "sibio",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
     "username": "farhanfarasdak",
     "password": null,
-    "database": "schools",
+    "database": "sibio",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "production": {
     "username": "farhanfarasdak",
     "password": null,
-    "database": "schools",
+    "database": "sibio",
     "host": "127.0.0.1",
     "dialect": "postgres"
   }
