@@ -1,12 +1,12 @@
 h1{
-  margin-top: 50px;
   text-align: center;
-  margin-bottom: 50px;
+  margin: 20px
 }
 
-.input-form{
-  border: 1px solid black;
-  padding: 30px;
-  width:80%;
-  border-radius: 10px;
+.add-menu{
+  width: 50%;
+  border: 1px solid grey;
+  padding: 20px;
+  border-radius: 20px;
+  margin-bottom: 20px;
 }

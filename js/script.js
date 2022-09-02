@@ -1,70 +1,66 @@
-const handleRegister = async () => {
-  let regUsername = document.getElementById("regUsername").value
-  let regFullname = document.getElementById("regFullname").value
-  let regAddress = document.getElementById("regAddress").value
-  let regJob = document.getElementById("regJob").value
-  let regAge = document.getElementById("regAge").value
 
-  const resp = await fetch('http://localhost:7070/register', {
+const handleInsertData = async () => {
+  let inputName = document.getElementById("inputName")
+  let inputDesc = document.getElementById("inputDescription")
+  let inputPrice = document.getElementById("inputPrice")
+
+  // POST /menus
+  const resp = await fetch('http://localhost:7575/menu',{
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      username: regUsername,
-      fullname: regFullname,
-      address: regAddress,
-      job: regJob,
-      age: regAge
+      name: inputName.value,
+      description: inputDesc.value,
+      price: inputPrice.value
     })
   })
 
-  if(resp.status === 201){
-    alert("Successfully insert data")
-    document.getElementById("regUsername").value = null
-    document.getElementById("regAddress").value = null
-    document.getElementById("regFullname").value = null
-    document.getElementById("regJob").value = null
-    document.getElementById("regAge").value = null
-  }else{
-    alert("Inser data failed")
+  location.reload()
+}
+
+const handleDelete = async (menuId) => {
+  let ans = confirm('Are you sure?')
+  if (ans){
+    // DELETE /menu/:id
+    await fetch(`http://localhost:7575/menu/${menuId}`, {
+      method: 'DELETE'
+    })
+
+    location.reload()
   }
 }
 
-const handleFindUser = async () => {
-  const username = document.getElementById("findUsername").value
-  const resp = await fetch(`http://localhost:7070/find/${username}`)
+const handlePrepareEdit = (id) => {
+  const trEl = document.getElementById(id)
+  //console.log(trEl.children[1].innerText)
+  document.getElementById("inputName").value = trEl.children[1].innerText
+  document.getElementById("inputDescription").value = trEl.children[2].innerText
+  document.getElementById("inputPrice").value = trEl.children[3].innerText
 
-  if(resp.status===404){
-    alert("User Not Found")
-  }else{
-    const data = await resp.json()
-    window.location.href = `/detail/${data.id}`
-  }
+  document.getElementById("btnInsert").disabled = true
+  document.getElementById("btnEdit").disabled = false
+  document.getElementById("btnEdit").setAttribute('onclick', `handleSubmitEdit(${id})`)
 }
 
-const handleEditBiodata = async (biodataId) => {
-  let Fullname = document.getElementById("Fullname").value
-  let Address = document.getElementById("Address").value
-  let Job = document.getElementById("Job").value
-  let Age = document.getElementById("Age").value
+const handleSubmitEdit = async (id) => {
+  let inputName = document.getElementById("inputName")
+  let inputDesc = document.getElementById("inputDescription")
+  let inputPrice = document.getElementById("inputPrice")
 
-  
-  const resp = await fetch(`http://localhost:7070/biodata/${biodataId}`, {
+  // PUT /menu/:id
+  await fetch(`http://localhost:7575/menu/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      fullname: Fullname,
-      address: Address,
-      job: Job,
-      age: Age
+      name: inputName.value,
+      description: inputDesc.value,
+      price: inputPrice.value
     })
   })
-  if(resp.status === 202){
-    alert("Data Has Been Updated")
-  }else{
-    alert("Failed Update Data")
-  }
+
+  location.reload()
 }
