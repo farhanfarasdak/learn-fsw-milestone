@@ -1,83 +1,38 @@
 const express = require('express')
-const bodyParser = require('body-parser')
-const axios = require('axios').default;
-const { Menu } = require('./models')
+const pageRouter = require('./routes/page')
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
+const passport = require('passport');
+require('./utils/passport')
 
 const app = express()
-const jsonParser = bodyParser.json()
+const port = 9090
 
 app.set('view engine', 'ejs')
-app.use('/css', express.static(__dirname+'/css'))
-app.use('/js', express.static(__dirname+'/js'))
+app.use(express.urlencoded({ extended: true }))
 
-// VIEWS
-app.get('/dashboard', async (req,res)=> {
-  const data = await axios.get('http://localhost:7575/menu')
-  console.log(data.data)
-  
-
-  res.render('dashboard', { menus: data.data } )
-})
-
-
-
-// CREATE
-app.post('/menu', jsonParser, async (req, res) => {
-  try {
-    const menu = await Menu.create({
-      name: req.body.name,
-      description: req.body.description,
-      price: req.body.price
-    })
-  
-    res.status(201).send(menu)
-  } catch (error) {
-    res.status(422).send('UNABLE TO INSERT DATA')
+// setup express session
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  store: MongoStore.create({
+    mongoUrl: 'mongodb+srv://farhan2:Farhan123!@cluster0.7unpxl8.mongodb.net/passport',
+    collectionName: 'sessions'
+  }),
+  saveUninitialized: true,
+  cookie: { 
+    maxAge: 1000 * 60 * 60 * 24
   }
-})
+}))
 
-// READ
-app.get('/menu', async(req,res) => {
-  const menus = await Menu.findAll()
-  res.send(menus)
-})
+// setup passport
+app.use(passport.initialize())
+app.use(passport.session())
 
-// UPDATE
-app.put('/menu/:id', jsonParser, async(req, res) => {
-  // const menu = await Menu.findOne({
-  //   where:{
-  //     id: req.params.id
-  //   }
-  // })
-
-  try {
-    const menu = await Menu.findByPk(req.params.id)
-    menu.name = req.body.name
-    menu.description = req.body.description
-    menu.price = req.body.price
-    await menu.save()
-
-    res.status(202).send(menu)
-  } catch (error) {
-    res.status(422).send('UNABLE TO UPDATE DATA')
-  }
-
-})
-
-// DELETE
-app.delete('/menu/:id', async(req,res) => {
-  try {
-    const menu = await Menu.findByPk(req.params.id)
-    menu.destroy()
-    res.status(202).send('DELETED')
-  } catch (error) {
-    res.status(422).send('UNABLE TO DELETE DATA')
-  }
-})
+app.use(pageRouter)
 
 
-
-
-app.listen('7575', () => {
-  console.log('APP IS RUNNING')
+app.listen(port, () => {
+  console.log(`App is running at port ${port}`)
 })
