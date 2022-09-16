@@ -1,40 +1,18 @@
-const { compareSync } = require("bcrypt");
-const passport = require("passport");
-const LocalStrategy = require('passport-local').Strategy
-const UserModel = require('../models/user.js')
+const JwtStrategy = require('passport-jwt').Strategy
+const ExtractJwt = require('passport-jwt').ExtractJwt
+const passport = require('passport');
+const UserModel = require('../models/user');
+const opts = {}
+opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+opts.secretOrKey = "supersecretkey";
 
-passport.use(new LocalStrategy(
-  function(username, password, done) {
 
-    UserModel.findOne({ username: username }, function (err, user) {
-
-      // if error
-      if (err) { return done(err); }
-
-      // if user not found
-      if (!user) { return done(null, false); }
-
-      // if wrong password
-      if ( !compareSync(password, user.password) ) { return done(null, false); }
-
-      // if all good
-      return done(null, user);
-    });
-  }
-));
-
-passport.serializeUser( (user, cb) => {
-  process.nextTick( () => {
-    return cb(null, {
-      id: user.id
-    })
-  })
-})
-
-passport.deserializeUser( (user, cb) => {
-  process.nextTick( async () => {
-    const userData = await UserModel.findById(user.id)
-    return cb(null, userData)
-  })
-})
-
+passport.use(new JwtStrategy(opts, async function(jwt_payload, done) {
+    const userData = await UserModel.findOne({ username: jwt_payload.username })
+    if(userData){
+      return done(null, userData)
+    }
+    else{
+      return done(null, false)
+    }
+}));
