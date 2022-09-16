@@ -1,6 +1,6 @@
 const { hashSync, compareSync } = require("bcrypt")
 const jwt  = require('jsonwebtoken')
-const UserModel = require("../models/user")
+const { User } = require("../models")
 
 exports.protected = (req, res) => {
   console.log(req.user)
@@ -11,7 +11,7 @@ exports.protected = (req, res) => {
 }
 
 exports.register = async (req, res) => {
-  const data = await UserModel.create({
+  const data = await User.create({
     username: req.body.username,
     password: hashSync(req.body.password, 10),
     job: req.body.job,
@@ -30,7 +30,11 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
   // query user ke db
-  const userData = await UserModel.findOne({ username: req.body.username })
+  const userData = await User.findOne({
+    where: {
+      username: req.body.username
+    }
+  })
 
   // kalau usernya ga exist, kasih response user not found
   if (!userData){
