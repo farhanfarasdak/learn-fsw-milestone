@@ -4,10 +4,11 @@ const router = express.Router()
 const pageController = require('../controllers/page')
 const customMiddleware = require('../utils/customMiddleware')
 
-router.get('/admin-dashboard',passport.authenticate('jwt', { session: false }), customMiddleware.validateSuperadmin, pageController.adminDashboard)
-router.get('/main-dashboard',passport.authenticate('jwt', { session: false }), pageController.mainDashboard)
+// router.get('/admin-dashboard',passport.authenticate('jwt', { session: false }), customMiddleware.validateSuperadmin, pageController.adminDashboard)
+// router.get('/main-dashboard',passport.authenticate('jwt', { session: false }), pageController.mainDashboard)
 
-
+router.get('/login', pageController.login)
+router.get('/admin', pageController.adminPage)
 
 module.exports = router
 

@@ -4,7 +4,7 @@ const passport = require('passport');
 const { User } = require('../models');
 const opts = {}
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = "supersecretkey";
+opts.secretOrKey = "kpukerenkey";
 
 
 passport.use(new JwtStrategy(opts, async function(jwt_payload, done) {
@@ -15,8 +15,8 @@ passport.use(new JwtStrategy(opts, async function(jwt_payload, done) {
       return done(null, {
         id: userData.id,
         username: userData.username,
-        job: userData.job,
-        role: userData.role
+        role: userData.role,
+        CandidateId: userData.CandidateId
       })
     }
     else{
