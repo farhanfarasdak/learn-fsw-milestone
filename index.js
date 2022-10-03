@@ -1,19 +1,26 @@
 const express = require('express')
-const passport = require('passport')
-require('./utils/passport')
-const apiRouter = require('./routes/api')
-const pageRouter = require('./routes/page')
-
 const app = express()
-const port = 8989
+const swaggerUI = require('swagger-ui-express')
+const swaggerJSON = require('./cp8.json')
 
-app.use('/js', express.static(__dirname + '/js'))
-app.set('view engine', 'ejs')
-app.use(passport.initialize())
+app.get('/', (req, res) => {
+  res.send('Hellow guys')
+})
 
-app.use(pageRouter)
-app.use(apiRouter)
+// GET USER /user
+app.get('/user', (req, res) => {
+  res.send({
+    id: 10,
+    name: 'John',
+    job: "Engineer"
+  })
+})
+// POST USER /user
+// PUT USER /user/:id
 
-app.listen(port, () => {
-  console.log(`App is running at port ${port}`)
+// Swagger docs
+app.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerJSON))
+
+app.listen('3030', () => {
+  console.log('App is running')
 })
