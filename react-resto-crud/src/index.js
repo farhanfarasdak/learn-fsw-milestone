@@ -3,15 +3,12 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import About from './components/About';
-import Card from './components/Card';
+import Menu from './pages/Menu';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    {/* <h1>I am plain html element</h1>
-    <About name="Farhan" address="Jakarta"/> */}
-    <Card name="Farhan" address="Jakarta"/>
+    <Menu />
   </React.StrictMode>
 );
 
