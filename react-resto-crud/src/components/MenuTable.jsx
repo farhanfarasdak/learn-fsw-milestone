@@ -1,9 +1,6 @@
-import { Component } from "react";
-
-class MenuTable extends Component{
-  render(){
-    return(
-      <div className="table-section">
+const MenuTable = (props) => {
+  return(
+    <div className="table-section">
         <table className="table">
           <thead>
             <tr>
@@ -15,16 +12,16 @@ class MenuTable extends Component{
           </thead>
           <tbody>
             { 
-            this.props.menus.map((menu) => (
+            props.menus.map((menu) => (
               <tr key={menu.id}>
                 <td>{menu.name}</td>
                 <td>{menu.description}</td>
                 <td>{menu.price}</td>
                 <td>
                   <button className="btn btn-primary" 
-                    onClick={() => { this.props.editFunc(menu) }}>UPDATE</button>
+                    onClick={() => { props.editFunc(menu) }}>UPDATE</button>
                   <button className="btn btn-danger m-1" 
-                    onClick={() => { this.props.deleteFunc(menu.id) }}>DELETE</button>
+                    onClick={() => { props.deleteFunc(menu.id) }}>DELETE</button>
                 </td>
               </tr>
             ))
@@ -32,8 +29,7 @@ class MenuTable extends Component{
           </tbody>
         </table>
       </div>
-    )
-  }
+  )
 }
 
 export default MenuTable
