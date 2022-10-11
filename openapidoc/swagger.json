@@ -1,0 +1,281 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Restaurant OpenAPI",
+    "version": "1.1"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:7070"
+    }
+  ],
+  "paths": {
+    "/menu": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Get All Menus",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 10
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Nasi Uduk"
+                      },
+                      "description": {
+                        "type": "string",
+                        "example": "Nasi Uduk Khas Jakarta"
+                      },
+                      "price": {
+                        "type": "integer",
+                        "example": 50
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "example": "2022-10-10T13:34:27.169Z"
+                      },
+                      "updatedAt": {
+                        "type": "string",
+                        "example": "2022-10-10T13:34:27.169Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Nasi Uduk"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Nasi Uduk Khas Jakarta"
+                  },
+                  "price": {
+                    "type": "integer",
+                    "example": 50
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Create New Menu",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 10
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Nasi Uduk"
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "Nasi Uduk Khas Jakarta"
+                    },
+                    "price": {
+                      "type": "integer",
+                      "example": 50
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "example": "2022-10-10T13:34:27.169Z"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "example": "2022-10-10T13:34:27.169Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid Request Body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid Request Body"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/menu/{id}": {
+      "put": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "id of the menu",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Nasi Uduk"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Nasi Uduk Khas Jakarta"
+                  },
+                  "price": {
+                    "type": "integer",
+                    "example": 50
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Update Existing Menu",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 10
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Nasi Uduk"
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "Nasi Uduk Khas Jakarta"
+                    },
+                    "price": {
+                      "type": "integer",
+                      "example": 50
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "example": "2022-10-10T13:34:27.169Z"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "example": "2022-10-10T13:34:27.169Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid Request Body",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid Request Body"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "id of the menu",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Success deleting menu",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 10
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Nasi Uduk"
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "Nasi Uduk Khas Jakarta"
+                    },
+                    "price": {
+                      "type": "integer",
+                      "example": 50
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "example": "2022-10-10T13:34:27.169Z"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "example": "2022-10-10T13:34:27.169Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
