@@ -7,7 +7,11 @@ import About from './pages/about';
 
 function App() {
   return (
-    <h1>Boiler Plate</h1>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />}/>
+      </Routes>
+    </Router>
   );
 }
 
